@@ -1,0 +1,91 @@
+```{r}
+install.packages('gtrendsR')
+library (gtrendsR)
+```
+
+```{r}
+install.packages("ggplot2")
+library(ggplot2)
+```
+
+
+```{r}
+#define the keywords
+keywords=c("nigger+niggers")
+#set the geographic area: DE = Germany
+country=c('US')
+#set the time window
+time=("all")
+#set channels 
+channel='web'
+```
+
+
+```{r}
+#All time 
+general=gtrends(keywords, gprop =channel,geo=country, time = time )
+genttrend=general$interest_over_time
+```
+
+```{r}
+#Plot: Change legend to {Nword}, change color to black
+plot<-ggplot(data=genttrend, aes(x=date, y=hits,group=keyword,col=keyword))+
+  geom_line()+xlab('Time')+ylab('Relative Interest')+ theme_bw()+ scale_color_manual(values=c("#000000"), labels="{Nword}") +
+  theme(legend.title = element_blank(),legend.position="bottom",legend.text=element_text(size=12))+ggtitle("Google Search Volume over Time")
+plot
+```
+
+```{r}
+#Define Keywors for Trump
+keywords=c("nigger + niggers")
+#set the geographic area: DE = Germany
+country=c('US')
+#set the time window
+time=("2015-01-01 2018-12-05")
+#set channels 
+channel='web'
+```
+
+```{r}
+#Setup for plotting
+trump=gtrends(keywords, gprop =channel,geo=country, time = time )
+trumptrend=trump$interest_over_time
+```
+
+```{r}
+#Plot: Change legend to {Nword} and color to red
+plot<-ggplot(data=trumptrend, aes(x=date, y=hits,group=keyword,col=keyword))+
+  geom_line()+xlab('Time')+ylab('Relative Interest')+ theme_bw()+ scale_color_manual(values=c("#CC6666"), labels="{Nword}") +
+  theme(legend.title = element_blank(),legend.position="bottom",legend.text=element_text(size=12))+ggtitle("Google Search Volume From Trump's Candidacy to Today")
+plot
+```
+
+```{r}
+#Keywords for Obama
+keywords=c("nigger + niggers")
+#set the geographic area: DE = Germany
+country=c('US')
+#set the time window
+time=("2005-01-01 2015-01-01")
+#set channels 
+channel='web'
+```
+
+```{r}
+
+#setup for Obama plot
+obama=gtrends(keywords, gprop =channel,geo=country, time = time )
+obamatrend=obama$interest_over_time
+```
+
+```{r}
+#Plot: Change legend to {Nword} and color to blue
+plot<-ggplot(data=obamatrend, aes(x=date, y=hits,group=keyword,col=keyword))+
+  geom_line()+xlab('Time')+ylab('Relative Interest')+ theme_bw()+ scale_color_manual(values=c("#000066"), labels="{Nword}") + 
+  theme(legend.title = element_blank(),legend.position="bottom",legend.text=element_text(size=12))+ggtitle("Google Search Volume From Obama's Cadidacy to Start of Trump's Campaign")
+plot
+```
+
+
+
+
